@@ -174,11 +174,11 @@ export const en: Translations = {
           { type: "h4", text: "2.3 User-Uploaded Media" },
           {
             type: "p",
-            html: `You may choose to attach photos or other media files to transactions (as receipts), to settlement records (as payment confirmation), or to support messages. These files are uploaded to and stored on our behalf by a third-party cloud storage provider. We do not collect this content passively — it is submitted only through your deliberate action.`,
+            html: `You may choose to attach photos or videos to transactions (as receipts), to settlement records (as payment confirmation), or to support messages. Photos and videos are both supported as support message attachments; receipts and payment proofs are photo-only. These files are uploaded to and stored on our behalf by a third-party cloud storage provider. We do not collect this content passively — it is submitted only through your deliberate action.`,
           },
           {
             type: "p",
-            html: `To enable file selection, the app requests access to your device's <strong>photo library</strong>. The app does not access your camera. Permission is requested only at the time you choose to attach a file, and you may revoke it at any time through your device settings.`,
+            html: `To enable file selection, the app requests access to your device's <strong>photo and video library</strong>. The app does not access your camera. Permission is requested only at the time you choose to attach a file, and you may revoke it at any time through your device settings.`,
           },
           { type: "h4", text: "2.4 Social and Relationship Data" },
           {
@@ -479,7 +479,7 @@ export const en: Translations = {
           },
           {
             type: "p",
-            html: `To enable file attachments, the app may request permission to access your device's photo library. This permission is optional — its refusal will limit the media attachment feature but will not affect core Service functionality. The app does not access your camera.`,
+            html: `To enable file attachments, the app may request permission to access your device's photo and video library. This permission is optional — its refusal will limit the media attachment feature but will not affect core Service functionality. The app does not access your camera.`,
           },
         ],
       },
