@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { AppleIcon, GooglePlayIcon } from "@/components/StoreIcons";
 
 export default function DownloadCTA() {
   const { t } = useLanguage();
@@ -72,7 +73,7 @@ export default function DownloadCTA() {
                 className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-base transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                 style={{ background: "white", color: "var(--text-primary)" }}
               >
-                <span className="text-xl">🍎</span>
+                <AppleIcon className="w-6 h-6 text-gray-900" />
                 <div className="text-left">
                   <div className="text-xs font-normal opacity-60 leading-none mb-0.5">{d.iosLabel1}</div>
                   <div className="font-black leading-none">{d.iosLabel2}</div>
@@ -87,7 +88,7 @@ export default function DownloadCTA() {
                   border: "1px solid rgba(255,255,255,0.2)",
                 }}
               >
-                <span className="text-xl">🤖</span>
+                <GooglePlayIcon className="w-6 h-6 text-white" />
                 <div className="text-left">
                   <div className="text-xs font-normal opacity-60 leading-none mb-0.5">{d.androidLabel1}</div>
                   <div className="font-black leading-none">{d.androidLabel2}</div>

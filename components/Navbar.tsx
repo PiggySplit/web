@@ -5,10 +5,18 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
+const NAV_WIDTHS = ["w-[80px]", "w-[108px]", "w-[72px]"];
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { locale, setLocale, t } = useLanguage();
+
+  const navLinks = [
+    { href: "/#features",     label: t.nav.features    },
+    { href: "/#how-it-works", label: t.nav.howItWorks  },
+    { href: "/download",      label: t.nav.download    },
+  ];
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -26,9 +34,9 @@ export default function Navbar() {
         boxShadow: scrolled ? "var(--shadow-sm)" : "none",
       }}
     >
-      <div className="max-w-5xl mx-auto px-8 sm:px-12 h-16 grid grid-cols-[1fr_auto_1fr] md:grid-cols-3 items-center">
-        {/* Col 1 — Logo, left-aligned */}
-        <Link href="/" className="flex items-center gap-2 justify-self-start">
+      <div className="max-w-5xl mx-auto px-8 sm:px-12 h-16 flex justify-between md:grid md:grid-cols-3 items-center">
+        {/* Col 1 — Logo */}
+        <Link href="/" className="flex items-center gap-2">
           <span className="text-2xl">🐷</span>
           <span className="font-black text-xl" style={{ color: "var(--text-primary)" }}>
             Piggy<span style={{ color: "var(--piggy-primary)" }}>Split</span>
@@ -37,18 +45,20 @@ export default function Navbar() {
 
         {/* Col 2 — Desktop nav, centered */}
         <div className="hidden md:flex items-center justify-center gap-8">
-          <NavLink href="/#features">{t.nav.features}</NavLink>
-          <NavLink href="/#how-it-works">{t.nav.howItWorks}</NavLink>
-          <NavLink href="/download">{t.nav.download}</NavLink>
+          {navLinks.map(({ href, label }, i) => (
+            <NavLink key={href} href={href} width={NAV_WIDTHS[i]}>
+              {label}
+            </NavLink>
+          ))}
         </div>
 
-        {/* Col 3 — Desktop CTA + mobile button, right-aligned */}
+        {/* Col 3 — Desktop CTA + mobile hamburger */}
         <div className="flex items-center justify-end gap-3">
           <div className="hidden md:flex items-center gap-3">
             <LocaleToggle locale={locale} setLocale={setLocale} />
             <Link
               href="/download"
-              className="px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-white"
+              className="min-w-[120px] text-center px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-white"
               style={{ background: "var(--piggy-primary)" }}
               onMouseEnter={e => (e.currentTarget.style.background = "var(--piggy-primary-dark)")}
               onMouseLeave={e => (e.currentTarget.style.background = "var(--piggy-primary)")}
@@ -75,9 +85,11 @@ export default function Navbar() {
             borderBottom: "1px solid var(--border)",
           }}
         >
-          <MobileNavLink href="/#features" onClick={() => setMenuOpen(false)}>{t.nav.features}</MobileNavLink>
-          <MobileNavLink href="/#how-it-works" onClick={() => setMenuOpen(false)}>{t.nav.howItWorks}</MobileNavLink>
-          <MobileNavLink href="/download" onClick={() => setMenuOpen(false)}>{t.nav.download}</MobileNavLink>
+          {navLinks.map(({ href, label }) => (
+            <MobileNavLink key={href} href={href} onClick={() => setMenuOpen(false)}>
+              {label}
+            </MobileNavLink>
+          ))}
           <div className="flex items-center justify-between mt-1">
             <LocaleToggle locale={locale} setLocale={setLocale} />
             <Link
@@ -95,11 +107,11 @@ export default function Navbar() {
   );
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({ href, width, children }: { href: string; width: string; children: React.ReactNode }) {
   return (
     <Link
       href={href}
-      className="text-sm font-semibold transition-colors duration-200 hover:opacity-70"
+      className={`${width} text-center text-sm font-semibold transition-colors duration-200 hover:opacity-70`}
       style={{ color: "var(--text-secondary)" }}
     >
       {children}

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
+import { AppleIcon, GooglePlayIcon } from "@/components/StoreIcons";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -27,13 +28,13 @@ export default function Footer() {
             <div className="flex gap-3 mt-6">
               <AppBadge
                 href="/download"
-                icon="🍎"
+                icon={<AppleIcon className="w-5 h-5 text-white" />}
                 label="App Store"
                 sublabel={t.nav.iosLabel}
               />
               <AppBadge
                 href="/download"
-                icon="🤖"
+                icon={<GooglePlayIcon className="w-5 h-5 text-white" />}
                 label="Google Play"
                 sublabel={t.nav.androidLabel}
               />
@@ -91,14 +92,14 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   );
 }
 
-function AppBadge({ href, icon, label, sublabel }: { href: string; icon: string; label: string; sublabel: string }) {
+function AppBadge({ href, icon, label, sublabel }: { href: string; icon: React.ReactNode; label: string; sublabel: string }) {
   return (
     <Link
       href={href}
       className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-80"
       style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}
     >
-      <span>{icon}</span>
+      {icon}
       <div>
         <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "9px", lineHeight: 1 }}>{sublabel}</div>
         <div style={{ color: "white", fontSize: "13px", fontWeight: 700 }}>{label}</div>
