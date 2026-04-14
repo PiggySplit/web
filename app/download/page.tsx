@@ -15,7 +15,7 @@ export default function Download() {
         <div className="max-w-4xl mx-auto px-8 sm:px-12">
           {/* Hero */}
           <div className="text-center mb-16">
-            <div className="text-6xl mb-6">🐷</div>
+            <div className="mb-6"><img src="/PiggySplit-icon.png" className="w-20 h-20 mx-auto" alt="PiggySplit" /></div>
             <h1 className="text-4xl sm:text-5xl font-black mb-4" style={{ color: "var(--text-primary)" }}>
               Get{" "}
               <span className="gradient-text">PiggySplit</span>
@@ -30,22 +30,20 @@ export default function Download() {
             <DownloadCard
               platform="iOS"
               icon="🍎"
+              badgeSrc="/App_Store_Badge.svg"
+              badgeAlt="Download on the App Store"
               title="App Store"
               description="iPhone and iPad. Requires iOS 16.0 or later."
-              badge="Available on the"
-              badgeSub="App Store"
-              color="var(--piggy-primary)"
               bg="var(--piggy-primary-light)"
               available={false}
             />
             <DownloadCard
               platform="Android"
               icon="🤖"
+              badgeSrc="/Google_Play_Badge_Web.svg"
+              badgeAlt="Get it on Google Play"
               title="Google Play"
               description="Android phones and tablets. Requires Android 10+."
-              badge="Get it on"
-              badgeSub="Google Play"
-              color="var(--piggy-accent)"
               bg="var(--piggy-accent-light)"
               available={false}
             />
@@ -103,21 +101,19 @@ export default function Download() {
 
 function DownloadCard({
   icon,
+  badgeSrc,
+  badgeAlt,
   title,
   description,
-  badge,
-  badgeSub,
-  color,
   bg,
   available,
 }: {
   platform: string;
   icon: string;
+  badgeSrc: string;
+  badgeAlt: string;
   title: string;
   description: string;
-  badge: string;
-  badgeSub: string;
-  color: string;
   bg: string;
   available: boolean;
 }) {
@@ -133,15 +129,8 @@ function DownloadCard({
         <h3 className="text-xl font-black mb-1" style={{ color: "var(--text-primary)" }}>{title}</h3>
         <p className="text-sm" style={{ color: "var(--text-secondary)" }}>{description}</p>
       </div>
-      <div
-        className="flex items-center justify-center gap-3 py-4 rounded-2xl mt-auto cursor-not-allowed opacity-60"
-        style={{ background: color, color: "white" }}
-      >
-        <span className="text-2xl">{icon}</span>
-        <div>
-          <div className="text-xs opacity-80 leading-none mb-0.5">{badge}</div>
-          <div className="font-black leading-none">{badgeSub}</div>
-        </div>
+      <div className="mt-auto cursor-not-allowed opacity-60 flex justify-center">
+        <img src={badgeSrc} alt={badgeAlt} className="h-14 w-auto" />
       </div>
       {!available && (
         <p className="text-center text-xs font-bold" style={{ color: "var(--text-tertiary)" }}>

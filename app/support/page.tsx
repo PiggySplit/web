@@ -51,7 +51,7 @@ export default function Support() {
         <div className="max-w-3xl mx-auto px-8 sm:px-12">
           {/* Header */}
           <div className="text-center mb-14">
-            <div className="text-5xl mb-4">🐷</div>
+            <div className="mb-4"><img src="/PiggySplit-icon.png" className="w-16 h-16 mx-auto" alt="PiggySplit" /></div>
             <h1 className="text-4xl font-black mb-3" style={{ color: "var(--text-primary)" }}>
               How can we help?
             </h1>

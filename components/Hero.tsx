@@ -83,7 +83,7 @@ export default function Hero() {
                 color: "var(--piggy-primary-dark)",
               }}
             >
-              <span>🐷</span>
+              <img src="/PiggySplit-icon.png" className="w-4 h-4" alt="" aria-hidden="true" />
               <span>{h.badge}</span>
             </div>
 

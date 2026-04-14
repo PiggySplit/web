@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { AppleIcon, GooglePlayIcon } from "@/components/StoreIcons";
 
 export default function DownloadCTA() {
   const { t } = useLanguage();
@@ -55,7 +54,7 @@ export default function DownloadCTA() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-6"
               style={{ background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.8)" }}
             >
-              <span>🐷</span> {d.badge}
+              <img src="/PiggySplit-icon.png" className="w-4 h-4" alt="" aria-hidden="true" /> {d.badge}
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-5 leading-tight">
@@ -67,32 +66,18 @@ export default function DownloadCTA() {
               {d.subtitle}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 href="/download"
-                className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-base transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                style={{ background: "white", color: "var(--text-primary)" }}
+                className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:opacity-90"
               >
-                <AppleIcon className="w-6 h-6 text-gray-900" />
-                <div className="text-left">
-                  <div className="text-xs font-normal opacity-60 leading-none mb-0.5">{d.iosLabel1}</div>
-                  <div className="font-black leading-none">{d.iosLabel2}</div>
-                </div>
+                <img src="/App_Store_Badge.svg" alt="Download on the App Store" className="h-14 w-auto" />
               </Link>
               <Link
                 href="/download"
-                className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-bold text-base transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  background: "rgba(255,255,255,0.12)",
-                  color: "white",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                }}
+                className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:opacity-90"
               >
-                <GooglePlayIcon className="w-6 h-6 text-white" />
-                <div className="text-left">
-                  <div className="text-xs font-normal opacity-60 leading-none mb-0.5">{d.androidLabel1}</div>
-                  <div className="font-black leading-none">{d.androidLabel2}</div>
-                </div>
+                <img src="/Google_Play_Badge_Web.svg" alt="Get it on Google Play" className="h-14 w-auto" />
               </Link>
             </div>
 

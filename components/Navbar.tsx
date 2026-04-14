@@ -37,7 +37,7 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto px-8 sm:px-12 h-16 flex justify-between md:grid md:grid-cols-3 items-center">
         {/* Col 1 — Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl">🐷</span>
+          <img src="/PiggySplit-icon.png" className="w-8 h-8" alt="" aria-hidden="true" />
           <span className="font-black text-xl" style={{ color: "var(--text-primary)" }}>
             Piggy<span style={{ color: "var(--piggy-primary)" }}>Split</span>
           </span>
@@ -142,7 +142,7 @@ function LocaleToggle({ locale, setLocale }: { locale: string; setLocale: (l: "e
         <button
           key={l}
           onClick={() => setLocale(l)}
-          className="px-3 py-1.5 transition-all duration-200"
+          className="px-3 py-1.5 transition-all duration-200 cursor-pointer"
           style={{
             background: locale === l ? "var(--piggy-primary)" : "transparent",
             color: locale === l ? "#fff" : "var(--text-secondary)",

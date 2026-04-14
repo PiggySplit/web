@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import { AppleIcon, GooglePlayIcon } from "@/components/StoreIcons";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -17,7 +16,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">🐷</span>
+              <img src="/PiggySplit-icon.png" className="w-8 h-8" alt="" aria-hidden="true" />
               <span className="font-black text-xl">
                 Piggy<span style={{ color: "var(--piggy-primary)" }}>Split</span>
               </span>
@@ -26,18 +25,8 @@ export default function Footer() {
               {t.footer.tagline}
             </p>
             <div className="flex gap-3 mt-6">
-              <AppBadge
-                href="/download"
-                icon={<AppleIcon className="w-5 h-5 text-white" />}
-                label="App Store"
-                sublabel={t.nav.iosLabel}
-              />
-              <AppBadge
-                href="/download"
-                icon={<GooglePlayIcon className="w-5 h-5 text-white" />}
-                label="Google Play"
-                sublabel={t.nav.androidLabel}
-              />
+              <AppBadge href="/download" src="/App_Store_Badge.svg" alt="Download on the App Store" />
+              <AppBadge href="/download" src="/Google_Play_Badge_Web.svg" alt="Get it on Google Play" />
             </div>
           </div>
 
@@ -92,18 +81,10 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   );
 }
 
-function AppBadge({ href, icon, label, sublabel }: { href: string; icon: React.ReactNode; label: string; sublabel: string }) {
+function AppBadge({ href, src, alt }: { href: string; src: string; alt: string }) {
   return (
-    <Link
-      href={href}
-      className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-80"
-      style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}
-    >
-      {icon}
-      <div>
-        <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "9px", lineHeight: 1 }}>{sublabel}</div>
-        <div style={{ color: "white", fontSize: "13px", fontWeight: 700 }}>{label}</div>
-      </div>
+    <Link href={href} className="transition-opacity duration-200 hover:opacity-80">
+      <img src={src} alt={alt} className="h-10 w-auto" />
     </Link>
   );
 }

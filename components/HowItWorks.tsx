@@ -62,7 +62,7 @@ export default function HowItWorks() {
               boxShadow: "0 6px 24px rgba(232,145,127,0.4)",
             }}
           >
-            <span>🐷</span>
+            <img src="/PiggySplit-icon.png" className="w-5 h-5" alt="" aria-hidden="true" />
             {h.ctaButton}
           </a>
         </div>
