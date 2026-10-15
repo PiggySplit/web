@@ -1,7 +1,8 @@
 import type { Translations } from "./types";
 
-const PRIVACY_EMAIL = "privacy@piggysplit.app";
-const LEGAL_EMAIL = "legal@piggysplit.app";
+const PRIVACY_EMAIL = "privacy@piggysplit.com";
+const LEGAL_EMAIL = "legal@piggysplit.com";
+const SUPPORT_EMAIL = "support@piggysplit.com";
 
 const a = (email: string) =>
   `<a href="mailto:${email}">${email}</a>`;
@@ -23,6 +24,7 @@ export const en: Translations = {
     privacy: "Privacy Policy",
     terms: "Terms of Service",
     support: "Support",
+    deleteAccount: "Delete account",
     madeWith: "Made with 🐷 for everyone who splits bills",
     allRights: "All rights reserved.",
   },
@@ -143,7 +145,7 @@ export const en: Translations = {
   privacyPolicy: {
     badge: "Legal",
     title: "Privacy Policy",
-    lastUpdated: "Last updated: April 12, 2026",
+    lastUpdated: "Last updated: October 15, 2026",
     sections: [
       {
         title: "1. Introduction",
@@ -275,7 +277,7 @@ export const en: Translations = {
           },
           {
             type: "p",
-            html: `When you delete your account, your profile is deactivated and you will no longer be able to access the Service. However, certain records — in particular, transaction histories and wallet data that are shared with and relied upon by other users — may be retained to preserve the integrity of those users' records. Where your identity is visible within retained records, we will seek to anonymise it where practicable.`,
+            html: `You can delete your account in the app (Profile, Delete Account), or as described at <a href="/delete-account">piggysplit.com/delete-account</a>. When you do, we immediately remove your email address and password, sign you out on every device, remove you from every wallet, and close wallets that only you belonged to. Your username stays on expenses, payments and comments in wallets you shared, so the other members' financial records remain accurate. Receipts and payment proofs attached to those shared records, and your support conversations, are kept as well.`,
           },
           {
             type: "p",
@@ -353,7 +355,7 @@ export const en: Translations = {
   terms: {
     badge: "Legal",
     title: "Terms of Service",
-    lastUpdated: "Last updated: April 12, 2026",
+    lastUpdated: "Last updated: October 15, 2026",
     sections: [
       {
         title: "1. Acceptance of Terms",
@@ -501,7 +503,7 @@ export const en: Translations = {
         blocks: [
           {
             type: "p",
-            html: `You may deactivate your account at any time through the app. Upon deactivation, your access to the Service will cease. As described in our Privacy Policy, certain records associated with your account may be retained to preserve the integrity of shared data that other users rely upon.`,
+            html: `You may delete your account at any time through the app, or as described at <a href="/delete-account">piggysplit.com/delete-account</a>. Upon deletion, your access to the Service ends. As described in our Privacy Policy, certain records associated with your account may be retained to preserve the integrity of shared data that other users rely upon.`,
           },
           {
             type: "p",
@@ -594,6 +596,76 @@ export const en: Translations = {
             html: `For questions or concerns regarding these Terms, please contact us at:`,
           },
           { type: "p", html: `<strong>Email:</strong> ${a(LEGAL_EMAIL)}` },
+        ],
+      },
+    ],
+  },
+  deleteAccount: {
+    badge: "Account deletion",
+    title: "Delete your PiggySplit account",
+    lastUpdated: "Last updated: October 15, 2026",
+    sections: [
+      {
+        title: "Delete it in the app",
+        blocks: [
+          { type: "p", html: `The quickest way. It takes effect right away.` },
+          {
+            type: "ul",
+            items: [
+              `Open PiggySplit and go to <strong>Profile</strong>.`,
+              `Scroll to the bottom and tap <strong>Delete Account</strong>.`,
+              `Confirm twice. You are signed out on every device.`,
+            ],
+          },
+          { type: "h4", text: "Before you can delete" },
+          {
+            type: "ul",
+            items: [
+              `Settle every unsettled expense, in every wallet.`,
+              `Transfer ownership of any shared wallet that still has other members.`,
+            ],
+          },
+          { type: "p", html: `The app tells you which of these is in the way.` },
+        ],
+      },
+      {
+        title: "Can't use the app?",
+        blocks: [
+          {
+            type: "p",
+            html: `Email ${a(SUPPORT_EMAIL)} from the email address on your account, with the subject "Delete my account". We confirm the request with you and complete it within 30 days.`,
+          },
+        ],
+      },
+      {
+        title: "What is deleted",
+        blocks: [
+          {
+            type: "ul",
+            items: [
+              `Your email address and password, immediately. The email address can be used to sign up again.`,
+              `Every active session, on every device.`,
+              `Your membership in every wallet.`,
+              `Wallets that only you belonged to are closed.`,
+            ],
+          },
+        ],
+      },
+      {
+        title: "What is kept, and why",
+        blocks: [
+          {
+            type: "ul",
+            items: [
+              `Your username on expenses, payments and comments in wallets you shared, so the other members' records stay correct.`,
+              `Receipts and payment proofs attached to those shared records.`,
+              `Your support conversations.`,
+            ],
+          },
+          {
+            type: "p",
+            html: `To ask for any of this to be erased as well, email ${a(PRIVACY_EMAIL)}. Section 6 of our <a href="/privacy-policy">Privacy Policy</a> explains how we handle these requests.`,
+          },
         ],
       },
     ],
