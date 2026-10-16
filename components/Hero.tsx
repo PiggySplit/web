@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import PhoneStatusBar from "@/components/PhoneStatusBar";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -169,19 +170,16 @@ function PhoneMockup({ card1Text, card1Sub, card2Text, card2Sub }: { card1Text: 
       <div
         className="relative w-[260px] sm:w-[280px] h-[540px] sm:h-[580px] rounded-[44px] overflow-hidden"
         style={{
-          background: "#1a1a2e",
+          background: "var(--bg-primary)",
           boxShadow: "0 0 0 2px #333, 0 30px 80px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.08)",
         }}
       >
-        {/* Notch */}
-        <div className="flex justify-center pt-3 pb-1 relative z-10" style={{ background: "#1a1a2e" }}>
-          <div className="w-24 h-6 rounded-full" style={{ background: "#0d0d1a" }} />
-        </div>
+        <PhoneStatusBar />
 
         {/* Screenshot placeholder */}
         <div
           className="w-full flex-1 flex items-start justify-center overflow-hidden"
-          style={{ background: "var(--bg-primary)", height: "calc(100% - 40px)" }}
+          style={{ background: "var(--bg-primary)", height: "calc(100% - 36px)" }}
           id="hero-screenshot"
         >
           <AppScreenMockup />
@@ -198,15 +196,6 @@ function PhoneMockup({ card1Text, card1Sub, card2Text, card2Sub }: { card1Text: 
 function AppScreenMockup() {
   return (
     <div className="w-full h-full p-4 overflow-hidden" style={{ background: "var(--bg-primary)" }}>
-      {/* Status bar */}
-      <div className="flex justify-between text-xs mb-4" style={{ color: "var(--text-tertiary)" }}>
-        <span className="font-bold">9:41</span>
-        <div className="flex gap-1 items-center">
-          <span>●●●</span>
-          <span>🔋</span>
-        </div>
-      </div>
-
       {/* Header */}
       <div className="mb-5">
         <p className="text-xs font-semibold mb-0.5" style={{ color: "var(--text-tertiary)" }}>Good morning 👋</p>
