@@ -128,7 +128,7 @@ export const en: Translations = {
         headline: "Your squad, connected.",
         description: "Add by username or share your link. Requests, accepted friends, and quick profile sharing.",
         bullets: ["Search by email or username", "Share your profile link", "Accept or decline requests"],
-        views: ["Friends", "Search"],
+        views: ["Friends", "Your QR code"],
       },
     ],
   },

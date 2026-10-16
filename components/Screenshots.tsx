@@ -8,7 +8,7 @@ import type { ScreenItem } from "@/lib/translations/types";
 const screenMeta = [
   { files: ["home-dashboard.png", "spending-charts.png"], placeholder: "home-dashboard", tagColor: "var(--piggy-primary-dark)", tagBg: "var(--piggy-primary-light)" },
   { files: ["wallet-detail.png", "expense-detail.png"],  placeholder: "wallet-detail",  tagColor: "#4AA08C",                   tagBg: "var(--piggy-accent-light)"    },
-  { files: ["friends.png", "friend-search.png"],        placeholder: "friends",         tagColor: "#B5862A",                   tagBg: "#FFE4A8"                       },
+  { files: ["friends.png", "profile-qr.png"],        placeholder: "friends",         tagColor: "#B5862A",                   tagBg: "#FFE4A8"                       },
 ];
 
 export default function Screenshots() {
