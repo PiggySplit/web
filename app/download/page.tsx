@@ -59,8 +59,8 @@ export default function Download() {
             </p>
             <p className="text-sm mt-1" style={{ color: "var(--text-tertiary)" }}>
               Want early access? Contact us at{" "}
-              <a href="mailto:beta@piggysplit.app" className="font-bold" style={{ color: "var(--piggy-primary)" }}>
-                beta@piggysplit.app
+              <a href="mailto:beta@piggysplit.com" className="font-bold" style={{ color: "var(--piggy-primary)" }}>
+                beta@piggysplit.com
               </a>
             </p>
           </div>

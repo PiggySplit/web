@@ -51,6 +51,7 @@ export default function Footer() {
               <FooterLink href="/privacy-policy">{t.footer.privacy}</FooterLink>
               <FooterLink href="/terms">{t.footer.terms}</FooterLink>
               <FooterLink href="/support">{t.footer.support}</FooterLink>
+              <FooterLink href="/delete-account">{t.footer.deleteAccount}</FooterLink>
             </ul>
           </div>
         </div>

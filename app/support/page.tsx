@@ -38,6 +38,10 @@ const faqs = [
     a: "Yes. Open any wallet and tap the export icon to download a CSV of all transactions.",
   },
   {
+    q: "How do I delete my account?",
+    a: "In the app, go to Profile and tap Delete Account at the bottom. Can't use the app? Follow the steps at piggysplit.com/delete-account.",
+  },
+  {
     q: "Does PiggySplit process actual payments?",
     a: "No. PiggySplit is a record-keeping tool. You pay each other through whatever method you prefer (bank transfer, cash, etc.) and log the proof in the app.",
   },
@@ -73,8 +77,8 @@ export default function Support() {
               icon="📧"
               title="Email us"
               description="For account issues, billing, or anything else. We reply within 24 hours."
-              cta="support@piggysplit.app"
-              href="mailto:support@piggysplit.app"
+              cta="support@piggysplit.com"
+              href="mailto:support@piggysplit.com"
             />
           </div>
 

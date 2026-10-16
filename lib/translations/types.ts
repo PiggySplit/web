@@ -8,6 +8,13 @@ export type PolicySection = {
   blocks: ContentBlock[];
 };
 
+export type PolicyDocument = {
+  badge: string;
+  title: string;
+  lastUpdated: string;
+  sections: PolicySection[];
+};
+
 export type FeatureItem = {
   title: string;
   headline: string;
@@ -47,6 +54,7 @@ export type Translations = {
     privacy: string;
     terms: string;
     support: string;
+    deleteAccount: string;
     madeWith: string;
     allRights: string;
   };
@@ -97,18 +105,9 @@ export type Translations = {
     androidLabel2: string;
     stats: StatItem[];
   };
-  privacyPolicy: {
-    badge: string;
-    title: string;
-    lastUpdated: string;
-    sections: PolicySection[];
-  };
-  terms: {
-    badge: string;
-    title: string;
-    lastUpdated: string;
-    sections: PolicySection[];
-  };
+  privacyPolicy: PolicyDocument;
+  terms: PolicyDocument;
+  deleteAccount: PolicyDocument;
 };
 
 export type Locale = "en" | "zh";

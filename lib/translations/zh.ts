@@ -1,7 +1,8 @@
 import type { Translations } from "./types";
 
-const PRIVACY_EMAIL = "privacy@piggysplit.app";
-const LEGAL_EMAIL = "legal@piggysplit.app";
+const PRIVACY_EMAIL = "privacy@piggysplit.com";
+const LEGAL_EMAIL = "legal@piggysplit.com";
+const SUPPORT_EMAIL = "support@piggysplit.com";
 
 const a = (email: string) =>
   `<a href="mailto:${email}">${email}</a>`;
@@ -23,6 +24,7 @@ export const zh: Translations = {
     privacy: "隱私政策",
     terms: "服務條款",
     support: "客戶支援",
+    deleteAccount: "刪除帳戶",
     madeWith: "以 🐷 之心，為每位分帳用戶打造",
     allRights: "版權所有。",
   },
@@ -143,7 +145,7 @@ export const zh: Translations = {
   privacyPolicy: {
     badge: "法律",
     title: "隱私政策",
-    lastUpdated: "最後更新：2026年4月12日",
+    lastUpdated: "最後更新：2026年10月15日",
     sections: [
       {
         title: "1. 簡介",
@@ -275,7 +277,7 @@ export const zh: Translations = {
           },
           {
             type: "p",
-            html: `當您刪除帳戶時，您的個人資料將被停用，您將無法再存取本服務。然而，某些記錄——特別是其他使用者共享且依賴的交易記錄及錢包資料——可能會被保留，以維護這些使用者記錄的完整性。對於保留記錄中可見的您的身份，我們將在可行的情況下尋求匿名化處理。`,
+            html: `您可以在應用程式內刪除帳戶（個人檔案 → 刪除帳戶），或依照 <a href="/delete-account">piggysplit.com/delete-account</a> 的說明操作。刪除後，我們會立即移除您的電子郵件地址與密碼、在所有裝置上將您登出、將您從每個錢包中移除，並關閉只有您一人的錢包。您的使用者名稱會保留在共享錢包的費用、付款與留言上，讓其他成員的財務記錄保持正確。附加在這些共享記錄上的收據與付款證明，以及您的客服對話記錄，也會一併保留。`,
           },
           {
             type: "p",
@@ -353,7 +355,7 @@ export const zh: Translations = {
   terms: {
     badge: "法律",
     title: "服務條款",
-    lastUpdated: "最後更新：2026年4月12日",
+    lastUpdated: "最後更新：2026年10月15日",
     sections: [
       {
         title: "1. 接受條款",
@@ -501,7 +503,7 @@ export const zh: Translations = {
         blocks: [
           {
             type: "p",
-            html: `您可隨時透過應用程式停用您的帳戶。停用後，您將無法存取本服務。如我們的隱私政策所述，與您帳戶相關的某些記錄可能會被保留，以維護其他使用者依賴的共享資料的完整性。`,
+            html: `您可隨時透過應用程式刪除您的帳戶，或依照 <a href="/delete-account">piggysplit.com/delete-account</a> 的說明操作。刪除後，您將無法再存取本服務。如我們的隱私政策所述，與您帳戶相關的某些記錄可能會被保留，以維護其他使用者依賴的共享資料的完整性。`,
           },
           {
             type: "p",
@@ -594,6 +596,76 @@ export const zh: Translations = {
             html: `如對本條款有任何疑問或顧慮，請聯絡我們：`,
           },
           { type: "p", html: `<strong>電子郵件：</strong>${a(LEGAL_EMAIL)}` },
+        ],
+      },
+    ],
+  },
+  deleteAccount: {
+    badge: "刪除帳戶",
+    title: "刪除您的 PiggySplit 帳戶",
+    lastUpdated: "最後更新：2026年10月15日",
+    sections: [
+      {
+        title: "在應用程式內刪除",
+        blocks: [
+          { type: "p", html: `最快的方式，立即生效。` },
+          {
+            type: "ul",
+            items: [
+              `開啟 PiggySplit，前往<strong>個人檔案</strong>。`,
+              `捲動到最下方，點選<strong>刪除帳戶</strong>。`,
+              `確認兩次。您會在所有裝置上被登出。`,
+            ],
+          },
+          { type: "h4", text: "刪除前需要完成" },
+          {
+            type: "ul",
+            items: [
+              `結清所有錢包中尚未結清的費用。`,
+              `轉移仍有其他成員的共享錢包的擁有權。`,
+            ],
+          },
+          { type: "p", html: `應用程式會告訴您是哪一項尚未完成。` },
+        ],
+      },
+      {
+        title: "無法使用應用程式？",
+        blocks: [
+          {
+            type: "p",
+            html: `請使用帳戶的電子郵件地址寄信至 ${a(SUPPORT_EMAIL)}，主旨為「刪除我的帳戶」。我們會與您確認請求，並在 30 天內完成。`,
+          },
+        ],
+      },
+      {
+        title: "會刪除的資料",
+        blocks: [
+          {
+            type: "ul",
+            items: [
+              `您的電子郵件地址與密碼，立即刪除。該電子郵件地址可再次用於註冊。`,
+              `所有裝置上的登入狀態。`,
+              `您在每個錢包的成員資格。`,
+              `只有您一人的錢包會被關閉。`,
+            ],
+          },
+        ],
+      },
+      {
+        title: "會保留的資料及原因",
+        blocks: [
+          {
+            type: "ul",
+            items: [
+              `您在共享錢包中的費用、付款與留言上的使用者名稱，讓其他成員的記錄保持正確。`,
+              `附加在這些共享記錄上的收據與付款證明。`,
+              `您的客服對話記錄。`,
+            ],
+          },
+          {
+            type: "p",
+            html: `如需一併刪除上述資料，請寄信至 ${a(PRIVACY_EMAIL)}。我們處理這類請求的方式請參閱<a href="/privacy-policy">隱私政策</a>第6條。`,
+          },
         ],
       },
     ],
