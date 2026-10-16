@@ -106,6 +106,9 @@ export const zh: Translations = {
     headline: "設計靈感，",
     headlineGradient: "輕鬆自在",
     subtitle: "簡潔、溫暖、快速。每個畫面都旨在讓你快速完成任務、毫不費力。",
+    showIos: "顯示 iOS 版本",
+    showAndroid: "顯示 Android 版本",
+    tapToSwitch: "點按切換",
     screens: [
       {
         tag: "分析",

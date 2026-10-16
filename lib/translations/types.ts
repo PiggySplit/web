@@ -93,6 +93,9 @@ export type Translations = {
     headlineGradient: string;
     subtitle: string;
     screens: ScreenItem[];
+    showIos: string;
+    showAndroid: string;
+    tapToSwitch: string;
   };
   downloadCta: {
     badge: string;

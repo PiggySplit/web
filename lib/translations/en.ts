@@ -106,6 +106,9 @@ export const en: Translations = {
     headline: "Designed to feel",
     headlineGradient: "effortless",
     subtitle: "Clean, warm, and fast. Every screen built around getting you in and out without friction.",
+    showIos: "Show the iOS version",
+    showAndroid: "Show the Android version",
+    tapToSwitch: "Tap to switch",
     screens: [
       {
         tag: "Analytics",
