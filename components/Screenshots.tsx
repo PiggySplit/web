@@ -165,11 +165,12 @@ function PhoneOrbit({ meta, index, views }: { meta: typeof screenMeta[0]; index:
 
   return (
     <div className="flex flex-col items-center gap-4">
+      {/* Height is width × 1462/720 plus the 36px notch bar, so the screenshot fits without cropping its bottom */}
       <button
         type="button"
         onClick={swap}
         aria-label={t.screenshots.showView.replace("{name}", views[1 - front])}
-        className="relative w-[220px] sm:w-[250px] h-[460px] sm:h-[520px] cursor-pointer rounded-[40px] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-8"
+        className="relative w-[220px] sm:w-[250px] h-[483px] sm:h-[544px] cursor-pointer rounded-[40px] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-8"
         style={{ outlineColor: "var(--piggy-primary)" }}
       >
         <div className="absolute inset-0 blur-2xl opacity-25 scale-90" style={{ background: meta.tagBg }} />
