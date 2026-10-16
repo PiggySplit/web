@@ -36,6 +36,7 @@ export type ScreenItem = {
   headline: string;
   description: string;
   bullets: string[];
+  views: [string, string];
 };
 
 export type Translations = {
@@ -93,8 +94,7 @@ export type Translations = {
     headlineGradient: string;
     subtitle: string;
     screens: ScreenItem[];
-    showIos: string;
-    showAndroid: string;
+    showView: string;
     tapToSwitch: string;
   };
   downloadCta: {

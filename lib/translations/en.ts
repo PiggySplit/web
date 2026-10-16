@@ -106,8 +106,7 @@ export const en: Translations = {
     headline: "Designed to feel",
     headlineGradient: "effortless",
     subtitle: "Clean, warm, and fast. Every screen built around getting you in and out without friction.",
-    showIos: "Show the iOS version",
-    showAndroid: "Show the Android version",
+    showView: "Show {name}",
     tapToSwitch: "Tap to switch",
     screens: [
       {
@@ -115,18 +114,21 @@ export const en: Translations = {
         headline: "See where it all goes.",
         description: "Balance, income, expenses — all on the home screen. Category charts and monthly trends built in.",
         bullets: ["Category pie chart", "Monthly trend line", "Income vs expense view"],
+        views: ["Home", "Spending charts"],
       },
       {
         tag: "Shared Wallets",
         headline: "One wallet, everyone in sync.",
         description: "Every member sees every transaction. See what needs you first, pull to refresh, settle in one tap.",
         bullets: ["Filter by what needs you", "Real-time member updates", "CSV export anytime"],
+        views: ["Transactions", "Expense detail"],
       },
       {
         tag: "Friends",
         headline: "Your squad, connected.",
         description: "Add by username or share your link. Requests, accepted friends, and quick profile sharing.",
         bullets: ["Search by email or username", "Share your profile link", "Accept or decline requests"],
+        views: ["Friends", "Search"],
       },
     ],
   },

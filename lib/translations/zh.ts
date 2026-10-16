@@ -106,8 +106,7 @@ export const zh: Translations = {
     headline: "設計靈感，",
     headlineGradient: "輕鬆自在",
     subtitle: "簡潔、溫暖、快速。每個畫面都旨在讓你快速完成任務、毫不費力。",
-    showIos: "顯示 iOS 版本",
-    showAndroid: "顯示 Android 版本",
+    showView: "顯示{name}",
     tapToSwitch: "點按切換",
     screens: [
       {
@@ -115,18 +114,21 @@ export const zh: Translations = {
         headline: "看清每一分去哪了。",
         description: "餘額、收入、支出——全在首頁一覽無遺。內建類別圖表和月度趨勢。",
         bullets: ["類別圓餅圖", "月度趨勢折線圖", "收入 vs 支出視圖"],
+        views: ["主頁", "消費圖表"],
       },
       {
         tag: "共享錢包",
         headline: "一個錢包，大家同步。",
         description: "每位成員查看每筆交易。優先顯示待你處理的項目、下拉刷新、一鍵結算。",
         bullets: ["篩選待你處理的項目", "成員即時更新", "隨時匯出 CSV"],
+        views: ["交易記錄", "交易詳情"],
       },
       {
         tag: "好友",
         headline: "你的圈子，連結在一起。",
         description: "透過用戶名或分享連結添加好友。管理好友請求、已接受的好友及個人資料分享。",
         bullets: ["透過電子郵件或用戶名搜尋", "分享個人資料連結", "接受或拒絕請求"],
+        views: ["好友", "搜尋"],
       },
     ],
   },

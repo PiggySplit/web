@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useRef, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import type { ScreenItem } from "@/lib/translations/types";
 
 const screenMeta = [
-  { file: "home-dashboard.png", placeholder: "home-dashboard", tagColor: "var(--piggy-primary-dark)", tagBg: "var(--piggy-primary-light)" },
-  { file: "wallet-detail.png",  placeholder: "wallet-detail",  tagColor: "#4AA08C",                   tagBg: "var(--piggy-accent-light)"    },
-  { file: "friends.png",        placeholder: "friends",         tagColor: "#B5862A",                   tagBg: "#FFE4A8"                       },
+  { files: ["home-dashboard.png", "spending-charts.png"], placeholder: "home-dashboard", tagColor: "var(--piggy-primary-dark)", tagBg: "var(--piggy-primary-light)" },
+  { files: ["wallet-detail.png", "expense-detail.png"],  placeholder: "wallet-detail",  tagColor: "#4AA08C",                   tagBg: "var(--piggy-accent-light)"    },
+  { files: ["friends.png", "friend-search.png"],        placeholder: "friends",         tagColor: "#B5862A",                   tagBg: "#FFE4A8"                       },
 ];
 
 export default function Screenshots() {
@@ -54,7 +55,7 @@ function ScreenRow({
   index,
   flip,
 }: {
-  screen: { tag: string; headline: string; description: string; bullets: string[] };
+  screen: ScreenItem;
   meta: typeof screenMeta[0];
   index: number;
   flip: boolean;
@@ -84,7 +85,7 @@ function ScreenRow({
       }}
     >
       <div className="flex-shrink-0 flex justify-center">
-        <PhoneOrbit meta={meta} index={index} />
+        <PhoneOrbit meta={meta} index={index} views={screen.views} />
       </div>
 
       {/* Copy */}
@@ -126,14 +127,12 @@ function ScreenRow({
   );
 }
 
-type Platform = "ios" | "android";
-const PLATFORMS: Platform[] = ["ios", "android"];
 // Front phone's resting angle on the ring; the other sits opposite, peeking out behind
 const REST_ANGLE = -22;
 const SPIN_MS = 750;
 
-// iOS and Android phones on one horizontal ring; a tap spins the ring half a turn to swap them
-function PhoneOrbit({ meta, index }: { meta: typeof screenMeta[0]; index: number }) {
+// Two screens on one horizontal ring; a tap spins the ring half a turn to swap them
+function PhoneOrbit({ meta, index, views }: { meta: typeof screenMeta[0]; index: number; views: [string, string] }) {
   const { t } = useLanguage();
   const [spin, setSpin] = useState(0);
   const radius = useIsNarrow() ? 64 : 110;
@@ -142,7 +141,7 @@ function PhoneOrbit({ meta, index }: { meta: typeof screenMeta[0]; index: number
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
 
-  const front: Platform = Math.round(spin / 180) % 2 === 0 ? "ios" : "android";
+  const front = Math.round(spin / 180) % 2;
 
   const swap = () => {
     const from = spinRef.current;
@@ -169,17 +168,17 @@ function PhoneOrbit({ meta, index }: { meta: typeof screenMeta[0]; index: number
       <button
         type="button"
         onClick={swap}
-        aria-label={front === "ios" ? t.screenshots.showAndroid : t.screenshots.showIos}
+        aria-label={t.screenshots.showView.replace("{name}", views[1 - front])}
         className="relative w-[220px] sm:w-[250px] h-[460px] sm:h-[520px] cursor-pointer rounded-[40px] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-8"
         style={{ outlineColor: "var(--piggy-primary)" }}
       >
         <div className="absolute inset-0 blur-2xl opacity-25 scale-90" style={{ background: meta.tagBg }} />
-        {PLATFORMS.map((platform, i) => {
+        {meta.files.map((file, i) => {
           const angle = ((REST_ANGLE + i * 180 + spin) * Math.PI) / 180;
           const depth = (Math.cos(angle) + 1) / 2; // 1 = front of the ring, 0 = back
           return (
             <div
-              key={platform}
+              key={file}
               className="absolute inset-0"
               style={{
                 transform: `translateX(${Math.sin(angle) * radius}px) scale(${0.78 + 0.22 * depth})`,
@@ -187,9 +186,9 @@ function PhoneOrbit({ meta, index }: { meta: typeof screenMeta[0]; index: number
                 filter: `brightness(${0.75 + 0.25 * depth})`,
               }}
             >
-              <PhoneFrame platform={platform}>
+              <PhoneFrame>
                 <ScreenImage
-                  file={platform === "ios" ? meta.file : meta.file.replace(".png", "-android.png")}
+                  file={file}
                   placeholder={meta.placeholder}
                   index={index}
                   tagBg={meta.tagBg}
@@ -200,10 +199,12 @@ function PhoneOrbit({ meta, index }: { meta: typeof screenMeta[0]; index: number
         })}
       </button>
       <p className="text-xs font-bold" style={{ color: "var(--text-tertiary)" }} aria-hidden="true">
-        <span style={{ color: front === "ios" ? "var(--text-primary)" : undefined }}>iOS</span>
-        {" · "}
-        <span style={{ color: front === "android" ? "var(--text-primary)" : undefined }}>Android</span>
-        {" · "}
+        {views.map((view, i) => (
+          <span key={view} style={{ color: front === i ? "var(--text-primary)" : undefined }}>
+            {view}
+            {" · "}
+          </span>
+        ))}
         {t.screenshots.tapToSwitch}
       </p>
     </div>
@@ -223,19 +224,17 @@ function useIsNarrow() {
   );
 }
 
-function PhoneFrame({ platform, children }: { platform: Platform; children: ReactNode }) {
-  const ios = platform === "ios";
+function PhoneFrame({ children }: { children: ReactNode }) {
   return (
     <div
-      className={`relative w-full h-full overflow-hidden ${ios ? "rounded-[40px]" : "rounded-[30px]"}`}
+      className="relative w-full h-full overflow-hidden rounded-[40px]"
       style={{
         background: "#1a1a2e",
         boxShadow: "0 0 0 2px #333, 0 24px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)",
       }}
     >
       <div className="flex justify-center pt-3 pb-1" style={{ background: "#1a1a2e" }}>
-        {/* Dynamic Island on iOS, a punch-hole camera on Android */}
-        <div className={ios ? "w-20 h-5 rounded-full" : "w-4 h-4 my-0.5 rounded-full"} style={{ background: "#0d0d1a" }} />
+        <div className="w-20 h-5 rounded-full" style={{ background: "#0d0d1a" }} />
       </div>
       <div className="w-full" style={{ height: "calc(100% - 36px)", position: "relative" }}>
         {children}
