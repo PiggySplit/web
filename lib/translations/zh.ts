@@ -61,7 +61,7 @@ export const zh: Translations = {
       {
         title: "付款憑證",
         headline: "不再有「我以為你付了」。",
-        description: "上傳截圖或照片作付款憑證。付款方確認後，記錄即鎖定。無爭議。",
+        description: "上傳截圖或照片作付款憑證。收款方確認後即完成結算。無爭議。",
       },
       {
         title: "好友系統",
@@ -116,8 +116,8 @@ export const zh: Translations = {
       {
         tag: "共享錢包",
         headline: "一個錢包，大家同步。",
-        description: "每位成員查看每筆交易。按狀態篩選、下拉刷新、一鍵結算。",
-        bullets: ["按待結算／已結算篩選", "成員即時更新", "隨時匯出 CSV"],
+        description: "每位成員查看每筆交易。優先顯示待你處理的項目、下拉刷新、一鍵結算。",
+        bullets: ["篩選待你處理的項目", "成員即時更新", "隨時匯出 CSV"],
       },
       {
         tag: "好友",

@@ -61,7 +61,7 @@ export const en: Translations = {
       {
         title: "Payment Proof",
         headline: "No more 'I thought you paid'.",
-        description: "Submit a screenshot or photo as payment proof. The payer confirms, the record is locked. No disputes.",
+        description: "Submit a screenshot or photo as payment proof. The person you paid confirms, and it's settled. No disputes.",
       },
       {
         title: "Friends System",
@@ -116,8 +116,8 @@ export const en: Translations = {
       {
         tag: "Shared Wallets",
         headline: "One wallet, everyone in sync.",
-        description: "Every member sees every transaction. Filter by status, pull to refresh, settle in one tap.",
-        bullets: ["Filter by pending/settled", "Real-time member updates", "CSV export anytime"],
+        description: "Every member sees every transaction. See what needs you first, pull to refresh, settle in one tap.",
+        bullets: ["Filter by what needs you", "Real-time member updates", "CSV export anytime"],
       },
       {
         tag: "Friends",
