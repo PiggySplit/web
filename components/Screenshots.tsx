@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import type { ScreenItem } from "@/lib/translations/types";
 
 const screenMeta = [
-  { file: "home-dashboard.png", placeholder: "home-dashboard", tagColor: "var(--piggy-primary-dark)", tagBg: "var(--piggy-primary-light)" },
-  { file: "wallet-detail.png",  placeholder: "wallet-detail",  tagColor: "#4AA08C",                   tagBg: "var(--piggy-accent-light)"    },
-  { file: "friends.png",        placeholder: "friends",         tagColor: "#B5862A",                   tagBg: "#FFE4A8"                       },
+  { files: ["home-dashboard.png", "spending-charts.png"], placeholder: "home-dashboard", tagColor: "var(--piggy-primary-dark)", tagBg: "var(--piggy-primary-light)" },
+  { files: ["wallet-detail.png", "expense-detail.png"],  placeholder: "wallet-detail",  tagColor: "#4AA08C",                   tagBg: "var(--piggy-accent-light)"    },
+  { files: ["friends.png", "profile-qr.png"],        placeholder: "friends",         tagColor: "#B5862A",                   tagBg: "#FFE4A8"                       },
 ];
 
 export default function Screenshots() {
@@ -54,7 +55,7 @@ function ScreenRow({
   index,
   flip,
 }: {
-  screen: { tag: string; headline: string; description: string; bullets: string[] };
+  screen: ScreenItem;
   meta: typeof screenMeta[0];
   index: number;
   flip: boolean;
@@ -83,28 +84,8 @@ function ScreenRow({
         transitionDelay: "100ms",
       }}
     >
-      {/* Phone */}
       <div className="flex-shrink-0 flex justify-center">
-        <div className="relative">
-          <div
-            className="absolute inset-0 blur-2xl opacity-25 scale-90"
-            style={{ background: meta.tagBg }}
-          />
-          <div
-            className="relative w-[220px] sm:w-[250px] h-[460px] sm:h-[520px] rounded-[40px] overflow-hidden"
-            style={{
-              background: "#1a1a2e",
-              boxShadow: "0 0 0 2px #333, 0 24px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)",
-            }}
-          >
-            <div className="flex justify-center pt-3 pb-1" style={{ background: "#1a1a2e" }}>
-              <div className="w-20 h-5 rounded-full" style={{ background: "#0d0d1a" }} />
-            </div>
-            <div className="w-full" style={{ height: "calc(100% - 36px)", position: "relative" }}>
-              <ScreenImage file={meta.file} placeholder={meta.placeholder} index={index} tagBg={meta.tagBg} />
-            </div>
-          </div>
-        </div>
+        <PhoneOrbit meta={meta} index={index} views={screen.views} />
       </div>
 
       {/* Copy */}
@@ -141,6 +122,123 @@ function ScreenRow({
             </div>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+// Front phone's resting angle on the ring; the other sits opposite, peeking out behind
+const REST_ANGLE = -22;
+const SPIN_MS = 750;
+
+// Two screens on one horizontal ring; a tap spins the ring half a turn to swap them
+function PhoneOrbit({ meta, index, views }: { meta: typeof screenMeta[0]; index: number; views: [string, string] }) {
+  const { t } = useLanguage();
+  const [spin, setSpin] = useState(0);
+  const radius = useIsNarrow() ? 64 : 110;
+  const spinRef = useRef(0);
+  const frame = useRef(0);
+
+  useEffect(() => () => cancelAnimationFrame(frame.current), []);
+
+  const front = Math.round(spin / 180) % 2;
+
+  const swap = () => {
+    const from = spinRef.current;
+    const to = Math.round(from / 180) * 180 + 180;
+    cancelAnimationFrame(frame.current);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      spinRef.current = to;
+      setSpin(to);
+      return;
+    }
+    const start = performance.now();
+    const step = (now: number) => {
+      const p = Math.min((now - start) / SPIN_MS, 1);
+      const eased = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      spinRef.current = from + (to - from) * eased;
+      setSpin(spinRef.current);
+      if (p < 1) frame.current = requestAnimationFrame(step);
+    };
+    frame.current = requestAnimationFrame(step);
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      {/* Height is width × 1462/720 plus the 36px notch bar, so the screenshot fits without cropping its bottom */}
+      <button
+        type="button"
+        onClick={swap}
+        aria-label={t.screenshots.showView.replace("{name}", views[1 - front])}
+        className="relative w-[220px] sm:w-[250px] h-[483px] sm:h-[544px] cursor-pointer rounded-[40px] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-8"
+        style={{ outlineColor: "var(--piggy-primary)" }}
+      >
+        <div className="absolute inset-0 blur-2xl opacity-25 scale-90" style={{ background: meta.tagBg }} />
+        {meta.files.map((file, i) => {
+          const angle = ((REST_ANGLE + i * 180 + spin) * Math.PI) / 180;
+          const depth = (Math.cos(angle) + 1) / 2; // 1 = front of the ring, 0 = back
+          return (
+            <div
+              key={file}
+              className="absolute inset-0"
+              style={{
+                transform: `translateX(${Math.sin(angle) * radius}px) scale(${0.78 + 0.22 * depth})`,
+                zIndex: Math.round(depth * 100),
+                filter: `brightness(${0.75 + 0.25 * depth})`,
+              }}
+            >
+              <PhoneFrame>
+                <ScreenImage
+                  file={file}
+                  placeholder={meta.placeholder}
+                  index={index}
+                  tagBg={meta.tagBg}
+                />
+              </PhoneFrame>
+            </div>
+          );
+        })}
+      </button>
+      <p className="text-xs font-bold" style={{ color: "var(--text-tertiary)" }} aria-hidden="true">
+        {views.map((view, i) => (
+          <span key={view} style={{ color: front === i ? "var(--text-primary)" : undefined }}>
+            {view}
+            {" · "}
+          </span>
+        ))}
+        {t.screenshots.tapToSwitch}
+      </p>
+    </div>
+  );
+}
+
+const NARROW = "(max-width: 639px)";
+function useIsNarrow() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const query = window.matchMedia(NARROW);
+      query.addEventListener("change", onChange);
+      return () => query.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia(NARROW).matches,
+    () => false,
+  );
+}
+
+function PhoneFrame({ children }: { children: ReactNode }) {
+  return (
+    <div
+      className="relative w-full h-full overflow-hidden rounded-[40px]"
+      style={{
+        background: "#1a1a2e",
+        boxShadow: "0 0 0 2px #333, 0 24px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)",
+      }}
+    >
+      <div className="flex justify-center pt-3 pb-1" style={{ background: "#1a1a2e" }}>
+        <div className="w-20 h-5 rounded-full" style={{ background: "#0d0d1a" }} />
+      </div>
+      <div className="w-full" style={{ height: "calc(100% - 36px)", position: "relative" }}>
+        {children}
       </div>
     </div>
   );
