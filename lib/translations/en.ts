@@ -180,7 +180,7 @@ export const en: Translations = {
           },
           {
             type: "p",
-            html: `To enable file selection, the app requests access to your device's <strong>photo and video library</strong>. The app does not access your camera. Permission is requested only at the time you choose to attach a file, and you may revoke it at any time through your device settings.`,
+            html: `Files are chosen through your device's built-in photo picker. The app never asks for access to your <strong>photo and video library</strong>: it only receives the specific files you pick. The app does not access your camera.`,
           },
           { type: "h4", text: "2.4 Social and Relationship Data" },
           {
@@ -481,7 +481,7 @@ export const en: Translations = {
           },
           {
             type: "p",
-            html: `To enable file attachments, the app may request permission to access your device's photo and video library. This permission is optional — its refusal will limit the media attachment feature but will not affect core Service functionality. The app does not access your camera.`,
+            html: `File attachments are chosen through your device's built-in photo picker, so the app needs no access to your photo and video library and only receives the files you pick. The app does not access your camera.`,
           },
         ],
       },
