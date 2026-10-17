@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useCallback, useRef, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import PhoneStatusBar from "@/components/PhoneStatusBar";
 import type { ScreenItem } from "@/lib/translations/types";
 
 const screenMeta = [
@@ -130,20 +131,32 @@ function ScreenRow({
 // Front phone's resting angle on the ring; the other sits opposite, peeking out behind
 const REST_ANGLE = -22;
 const SPIN_MS = 750;
+const AUTO_SPIN_MS = 5000;
 
-// Two screens on one horizontal ring; a tap spins the ring half a turn to swap them
+// Two screens on one horizontal ring; a tap, or 5s on screen, spins the ring half a turn to swap them
 function PhoneOrbit({ meta, index, views }: { meta: typeof screenMeta[0]; index: number; views: [string, string] }) {
   const { t } = useLanguage();
   const [spin, setSpin] = useState(0);
   const radius = useIsNarrow() ? 64 : 110;
   const spinRef = useRef(0);
   const frame = useRef(0);
+  const ringRef = useRef<HTMLButtonElement>(null);
+  const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
 
+  useEffect(() => {
+    const el = ringRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.5 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   const front = Math.round(spin / 180) % 2;
 
-  const swap = () => {
+  const swap = useCallback(() => {
     const from = spinRef.current;
     const to = Math.round(from / 180) * 180 + 180;
     cancelAnimationFrame(frame.current);
@@ -161,14 +174,26 @@ function PhoneOrbit({ meta, index, views }: { meta: typeof screenMeta[0]; index:
       if (p < 1) frame.current = requestAnimationFrame(step);
     };
     frame.current = requestAnimationFrame(step);
-  };
+  }, []);
+
+  // Restarts on every swap, so a tap buys a full 5s; hover or keyboard focus pauses it, reduced motion turns it off
+  useEffect(() => {
+    if (!inView || paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = setTimeout(swap, AUTO_SPIN_MS);
+    return () => clearTimeout(timer);
+  }, [inView, paused, front, swap]);
 
   return (
     <div className="flex flex-col items-center gap-4">
-      {/* Height is width × 1462/720 plus the 36px notch bar, so the screenshot fits without cropping its bottom */}
+      {/* Height is width × 1462/720 plus the 36px status bar, so the screenshot fits without cropping its bottom */}
       <button
+        ref={ringRef}
         type="button"
         onClick={swap}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={(e) => setPaused(e.currentTarget.matches(":focus-visible"))}
+        onBlur={() => setPaused(false)}
         aria-label={t.screenshots.showView.replace("{name}", views[1 - front])}
         className="relative w-[220px] sm:w-[250px] h-[483px] sm:h-[544px] cursor-pointer rounded-[40px] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-8"
         style={{ outlineColor: "var(--piggy-primary)" }}
@@ -230,13 +255,11 @@ function PhoneFrame({ children }: { children: ReactNode }) {
     <div
       className="relative w-full h-full overflow-hidden rounded-[40px]"
       style={{
-        background: "#1a1a2e",
+        background: "var(--bg-primary)",
         boxShadow: "0 0 0 2px #333, 0 24px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)",
       }}
     >
-      <div className="flex justify-center pt-3 pb-1" style={{ background: "#1a1a2e" }}>
-        <div className="w-20 h-5 rounded-full" style={{ background: "#0d0d1a" }} />
-      </div>
+      <PhoneStatusBar />
       <div className="w-full" style={{ height: "calc(100% - 36px)", position: "relative" }}>
         {children}
       </div>
