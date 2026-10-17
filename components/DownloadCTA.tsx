@@ -81,6 +81,17 @@ export default function DownloadCTA() {
               </Link>
             </div>
 
+            <p className="text-sm mt-6 max-w-md mx-auto" style={{ color: "rgba(255,255,255,0.65)" }}>
+              {d.androidTesters}{" "}
+              <a
+                href="mailto:beta@piggysplit.com?subject=Android%20tester"
+                className="font-bold underline underline-offset-2"
+                style={{ color: "var(--piggy-primary-light)" }}
+              >
+                beta@piggysplit.com
+              </a>
+            </p>
+
             {/* Stats */}
             <div className="flex flex-col sm:flex-row gap-8 justify-center mt-12 pt-10" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
               {d.stats.map((stat, i) => (

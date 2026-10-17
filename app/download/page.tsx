@@ -46,22 +46,24 @@ export default function Download() {
               description="Android phones and tablets. Requires Android 10+."
               bg="var(--piggy-accent-light)"
               available={false}
+              status="In internal testing"
             />
           </div>
 
-          {/* Coming soon notice */}
+          {/* Android tester call-out */}
           <div
             className="rounded-2xl p-6 text-center mb-16"
             style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}
           >
             <p className="text-sm font-bold" style={{ color: "var(--text-secondary)" }}>
-              🚀 PiggySplit is currently in beta. Store links will be live soon.
+              🤖 We&apos;re looking for Android testers
             </p>
-            <p className="text-sm mt-1" style={{ color: "var(--text-tertiary)" }}>
-              Want early access? Contact us at{" "}
-              <a href="mailto:beta@piggysplit.com" className="font-bold" style={{ color: "var(--piggy-primary)" }}>
+            <p className="text-sm mt-1 max-w-md mx-auto" style={{ color: "var(--text-tertiary)" }}>
+              PiggySplit for Android is in internal testing. Want in? Email{" "}
+              <a href="mailto:beta@piggysplit.com?subject=Android%20tester" className="font-bold" style={{ color: "var(--piggy-primary)" }}>
                 beta@piggysplit.com
-              </a>
+              </a>{" "}
+              with the Google account you use on Google Play, and we&apos;ll send you an invite. The App Store release is coming soon.
             </p>
           </div>
 
@@ -107,6 +109,7 @@ function DownloadCard({
   description,
   bg,
   available,
+  status = "Coming soon",
 }: {
   platform: string;
   icon: string;
@@ -116,6 +119,7 @@ function DownloadCard({
   description: string;
   bg: string;
   available: boolean;
+  status?: string;
 }) {
   return (
     <div
@@ -134,7 +138,7 @@ function DownloadCard({
       </div>
       {!available && (
         <p className="text-center text-xs font-bold" style={{ color: "var(--text-tertiary)" }}>
-          Coming soon
+          {status}
         </p>
       )}
     </div>
