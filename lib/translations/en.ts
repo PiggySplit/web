@@ -141,6 +141,7 @@ export const en: Translations = {
     iosLabel2: "App Store",
     androidLabel1: "Get it on",
     androidLabel2: "Google Play",
+    androidTesters: "Android is in internal testing and we're looking for testers. Want in? Email",
     stats: [
       { value: "Free", label: "Always free to use" },
       { value: "iOS + Android", label: "Both platforms" },

@@ -141,6 +141,7 @@ export const zh: Translations = {
     iosLabel2: "App Store 下載",
     androidLabel1: "立即到",
     androidLabel2: "Google Play 取得",
+    androidTesters: "Android 版正在內部測試，誠徵測試者！有興趣請電郵至",
     stats: [
       { value: "免費", label: "永久免費使用" },
       { value: "iOS + Android", label: "雙平台支援" },

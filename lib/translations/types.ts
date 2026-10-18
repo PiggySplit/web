@@ -106,6 +106,7 @@ export type Translations = {
     iosLabel2: string;
     androidLabel1: string;
     androidLabel2: string;
+    androidTesters: string;
     stats: StatItem[];
   };
   privacyPolicy: PolicyDocument;
