@@ -126,19 +126,24 @@ function DownloadCard({
       className="rounded-3xl p-8 flex flex-col gap-5"
       style={{ background: "var(--surface)", border: "1px solid var(--border)", boxShadow: "var(--shadow-sm)" }}
     >
-      <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl" style={{ background: bg }}>
+      <div className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl" style={{ background: bg }}>
         {icon}
       </div>
-      <div>
+      <div className="text-center">
         <h3 className="text-xl font-black mb-1" style={{ color: "var(--text-primary)" }}>{title}</h3>
         <p className="text-sm" style={{ color: "var(--text-secondary)" }}>{description}</p>
       </div>
-      <div className="mt-auto flex justify-center">{badge}</div>
-      {status && (
-        <p className="text-center text-xs font-bold" style={{ color: "var(--text-tertiary)" }}>
+      {/* Status line always renders (empty if none) so badges line up across cards */}
+      <div className="mt-auto flex flex-col items-center gap-3">
+        {badge}
+        <p
+          className={`text-center text-xs font-bold min-h-4 ${status ? "" : "hidden sm:block"}`}
+          style={{ color: "var(--text-tertiary)" }}
+          aria-hidden={!status}
+        >
           {status}
         </p>
-      )}
+      </div>
     </div>
   );
 }
