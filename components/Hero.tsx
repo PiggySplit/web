@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import PhoneStatusBar from "@/components/PhoneStatusBar";
+import PlayStoreTooltip from "@/components/PlayStoreTooltip";
+import { APP_STORE_URL } from "@/lib/links";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -104,16 +105,16 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-10">
-              <Link
-                href="/download"
+              <a
+                href={APP_STORE_URL}
                 className="flex items-center justify-center gap-3 px-7 py-4 rounded-2xl font-bold text-base text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                 style={{ background: "linear-gradient(135deg, var(--piggy-primary), var(--piggy-primary-dark))", boxShadow: "0 4px 20px rgba(232,145,127,0.4)" }}
               >
-                <span>🍎</span> {h.iosButton}
-              </Link>
-              <Link
-                href="/download"
-                className="flex items-center justify-center gap-3 px-7 py-4 rounded-2xl font-bold text-base transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                <span aria-hidden="true">🍎</span> {h.iosButton}
+              </a>
+              <PlayStoreTooltip
+                wrapperClassName="flex"
+                className="w-full flex items-center justify-center gap-3 px-7 py-4 rounded-2xl font-bold text-base transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                 style={{
                   background: "var(--surface)",
                   color: "var(--text-primary)",
@@ -121,8 +122,8 @@ export default function Hero() {
                   boxShadow: "var(--shadow-sm)",
                 }}
               >
-                <span>🤖</span> {h.androidButton}
-              </Link>
+                <span aria-hidden="true">🤖</span> {h.androidButton}
+              </PlayStoreTooltip>
             </div>
 
             {/* Social proof */}

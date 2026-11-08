@@ -107,6 +107,9 @@ export type Translations = {
     androidLabel1: string;
     androidLabel2: string;
     androidTesters: string;
+    playTooltipTitle: string;
+    playTooltipBefore: string;
+    playTooltipAfter: string;
     stats: StatItem[];
   };
   privacyPolicy: PolicyDocument;

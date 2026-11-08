@@ -1,6 +1,9 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PlayStoreTooltip from "@/components/PlayStoreTooltip";
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { APP_STORE_URL, TESTER_EMAIL, TESTER_MAILTO } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: "Download PiggySplit — iOS & Android",
@@ -28,25 +31,27 @@ export default function Download() {
           {/* Download cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
             <DownloadCard
-              platform="iOS"
               icon="🍎"
-              badgeSrc="/App_Store_Badge.svg"
-              badgeAlt="Download on the App Store"
               title="App Store"
               description="iPhone and iPad. Requires iOS 16.0 or later."
               bg="var(--piggy-primary-light)"
-              available={false}
+              badge={
+                <a href={APP_STORE_URL} className="transition-opacity duration-200 hover:opacity-80">
+                  <img src="/App_Store_Badge.svg" alt="Download on the App Store" className="h-14 w-auto" />
+                </a>
+              }
             />
             <DownloadCard
-              platform="Android"
               icon="🤖"
-              badgeSrc="/Google_Play_Badge_Web.svg"
-              badgeAlt="Get it on Google Play"
               title="Google Play"
               description="Android phones and tablets. Requires Android 10+."
               bg="var(--piggy-accent-light)"
-              available={false}
               status="In internal testing"
+              badge={
+                <PlayStoreTooltip className="transition-opacity duration-200 hover:opacity-80">
+                  <img src="/Google_Play_Badge_Web.svg" alt="Get it on Google Play" className="h-14 w-auto" />
+                </PlayStoreTooltip>
+              }
             />
           </div>
 
@@ -60,10 +65,10 @@ export default function Download() {
             </p>
             <p className="text-sm mt-1 max-w-md mx-auto" style={{ color: "var(--text-tertiary)" }}>
               PiggySplit for Android is in internal testing. Want in? Email{" "}
-              <a href="mailto:beta@piggysplit.com?subject=Android%20tester" className="font-bold" style={{ color: "var(--piggy-primary)" }}>
-                beta@piggysplit.com
+              <a href={TESTER_MAILTO} className="font-bold" style={{ color: "var(--piggy-primary-dark)" }}>
+                {TESTER_EMAIL}
               </a>{" "}
-              with the Google account you use on Google Play, and we&apos;ll send you an invite. The App Store release is coming soon.
+              with the Google account you use on Google Play, and we&apos;ll send you an invite.
             </p>
           </div>
 
@@ -103,22 +108,17 @@ export default function Download() {
 
 function DownloadCard({
   icon,
-  badgeSrc,
-  badgeAlt,
   title,
   description,
   bg,
-  available,
-  status = "Coming soon",
+  badge,
+  status,
 }: {
-  platform: string;
   icon: string;
-  badgeSrc: string;
-  badgeAlt: string;
   title: string;
   description: string;
   bg: string;
-  available: boolean;
+  badge: ReactNode;
   status?: string;
 }) {
   return (
@@ -133,10 +133,8 @@ function DownloadCard({
         <h3 className="text-xl font-black mb-1" style={{ color: "var(--text-primary)" }}>{title}</h3>
         <p className="text-sm" style={{ color: "var(--text-secondary)" }}>{description}</p>
       </div>
-      <div className="mt-auto cursor-not-allowed opacity-60 flex justify-center">
-        <img src={badgeSrc} alt={badgeAlt} className="h-14 w-auto" />
-      </div>
-      {!available && (
+      <div className="mt-auto flex justify-center">{badge}</div>
+      {status && (
         <p className="text-center text-xs font-bold" style={{ color: "var(--text-tertiary)" }}>
           {status}
         </p>
