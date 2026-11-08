@@ -48,7 +48,7 @@ export default function Download() {
               bg="var(--piggy-accent-light)"
               status="In internal testing"
               badge={
-                <PlayStoreTooltip className="transition-opacity duration-200 hover:opacity-80">
+                <PlayStoreTooltip>
                   <img src="/Google_Play_Badge_Web.svg" alt="Get it on Google Play" className="h-14 w-auto" />
                 </PlayStoreTooltip>
               }

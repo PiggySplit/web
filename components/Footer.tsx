@@ -30,7 +30,7 @@ export default function Footer() {
               <a href={APP_STORE_URL} className="py-1 transition-opacity duration-200 hover:opacity-80">
                 <img src="/App_Store_Badge.svg" alt="Download on the App Store" className="h-10 w-auto" />
               </a>
-              <PlayStoreTooltip className="py-1 transition-opacity duration-200 hover:opacity-80">
+              <PlayStoreTooltip className="py-1">
                 <img src="/Google_Play_Badge_Web.svg" alt="Get it on Google Play" className="h-10 w-auto" />
               </PlayStoreTooltip>
             </div>
