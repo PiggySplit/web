@@ -142,6 +142,9 @@ export const zh: Translations = {
     androidLabel1: "立即到",
     androidLabel2: "Google Play 取得",
     androidTesters: "Android 版正在內部測試，誠徵測試者！有興趣請電郵至",
+    playTooltipTitle: "目前僅開放內部測試",
+    playTooltipBefore: "想試用？請用你在 Google Play 使用的 Google 帳戶電郵至",
+    playTooltipAfter: "，我們會把你加入測試名單。",
     stats: [
       { value: "免費", label: "永久免費使用" },
       { value: "iOS + Android", label: "雙平台支援" },

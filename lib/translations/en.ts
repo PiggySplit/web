@@ -142,6 +142,9 @@ export const en: Translations = {
     androidLabel1: "Get it on",
     androidLabel2: "Google Play",
     androidTesters: "Android is in internal testing and we're looking for testers. Want in? Email",
+    playTooltipTitle: "Open for internal testing at the moment",
+    playTooltipBefore: "Want in? Email",
+    playTooltipAfter: "from the Google account you use on Google Play and we'll add you.",
     stats: [
       { value: "Free", label: "Always free to use" },
       { value: "iOS + Android", label: "Both platforms" },

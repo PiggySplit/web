@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
+import PlayStoreTooltip from "@/components/PlayStoreTooltip";
+import { APP_STORE_URL } from "@/lib/links";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -25,8 +27,12 @@ export default function Footer() {
               {t.footer.tagline}
             </p>
             <div className="flex gap-3 mt-6">
-              <AppBadge href="/download" src="/App_Store_Badge.svg" alt="Download on the App Store" />
-              <AppBadge href="/download" src="/Google_Play_Badge_Web.svg" alt="Get it on Google Play" />
+              <a href={APP_STORE_URL} className="py-1 transition-opacity duration-200 hover:opacity-80">
+                <img src="/App_Store_Badge.svg" alt="Download on the App Store" className="h-10 w-auto" />
+              </a>
+              <PlayStoreTooltip className="py-1 transition-opacity duration-200 hover:opacity-80">
+                <img src="/Google_Play_Badge_Web.svg" alt="Get it on Google Play" className="h-10 w-auto" />
+              </PlayStoreTooltip>
             </div>
           </div>
 
@@ -79,13 +85,5 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
         {children}
       </Link>
     </li>
-  );
-}
-
-function AppBadge({ href, src, alt }: { href: string; src: string; alt: string }) {
-  return (
-    <Link href={href} className="transition-opacity duration-200 hover:opacity-80">
-      <img src={src} alt={alt} className="h-10 w-auto" />
-    </Link>
   );
 }

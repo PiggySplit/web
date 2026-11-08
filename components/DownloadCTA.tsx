@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import PlayStoreTooltip from "@/components/PlayStoreTooltip";
+import { APP_STORE_URL, TESTER_EMAIL, TESTER_MAILTO } from "@/lib/links";
 
 export default function DownloadCTA() {
   const { t } = useLanguage();
@@ -67,28 +68,25 @@ export default function DownloadCTA() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                href="/download"
+              <a
+                href={APP_STORE_URL}
                 className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:opacity-90"
               >
                 <img src="/App_Store_Badge.svg" alt="Download on the App Store" className="h-14 w-auto" />
-              </Link>
-              <Link
-                href="/download"
-                className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:opacity-90"
-              >
+              </a>
+              <PlayStoreTooltip className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:opacity-90">
                 <img src="/Google_Play_Badge_Web.svg" alt="Get it on Google Play" className="h-14 w-auto" />
-              </Link>
+              </PlayStoreTooltip>
             </div>
 
             <p className="text-sm mt-6 max-w-md mx-auto" style={{ color: "rgba(255,255,255,0.65)" }}>
               {d.androidTesters}{" "}
               <a
-                href="mailto:beta@piggysplit.com?subject=Android%20tester"
+                href={TESTER_MAILTO}
                 className="font-bold underline underline-offset-2"
                 style={{ color: "var(--piggy-primary-light)" }}
               >
-                beta@piggysplit.com
+                {TESTER_EMAIL}
               </a>
             </p>
 
