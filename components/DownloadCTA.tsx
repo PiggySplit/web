@@ -74,7 +74,7 @@ export default function DownloadCTA() {
               >
                 <img src="/App_Store_Badge.svg" alt="Download on the App Store" className="h-14 w-auto" />
               </a>
-              <PlayStoreTooltip className="transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:opacity-90">
+              <PlayStoreTooltip>
                 <img src="/Google_Play_Badge_Web.svg" alt="Get it on Google Play" className="h-14 w-auto" />
               </PlayStoreTooltip>
             </div>

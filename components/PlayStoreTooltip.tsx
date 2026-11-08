@@ -71,7 +71,8 @@ export default function PlayStoreTooltip({
         aria-controls={id}
         // Hover already opened it, so a mouse click must not toggle it shut.
         onClick={() => setOpen((o) => hovering.current || !o)}
-        className={`cursor-pointer ${className}`}
+        // Dimmed while Android is in internal testing; the tooltip says why.
+        className={`cursor-not-allowed opacity-60 ${className}`}
         style={style}
       >
         {children}

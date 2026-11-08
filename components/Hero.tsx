@@ -114,7 +114,7 @@ export default function Hero() {
               </a>
               <PlayStoreTooltip
                 wrapperClassName="flex"
-                className="w-full flex items-center justify-center gap-3 px-7 py-4 rounded-2xl font-bold text-base transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full flex items-center justify-center gap-3 px-7 py-4 rounded-2xl font-bold text-base"
                 style={{
                   background: "var(--surface)",
                   color: "var(--text-primary)",
