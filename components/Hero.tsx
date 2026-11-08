@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import PhoneStatusBar from "@/components/PhoneStatusBar";
+import PhoneStatusBar, { PhoneHomeIndicator } from "@/components/PhoneStatusBar";
 import PlayStoreTooltip from "@/components/PlayStoreTooltip";
 import { APP_STORE_URL } from "@/lib/links";
 
@@ -185,6 +185,7 @@ function PhoneMockup({ card1Text, card1Sub, card2Text, card2Sub }: { card1Text: 
         >
           <AppScreenMockup />
         </div>
+        <PhoneHomeIndicator />
       </div>
 
       {/* Floating cards */}
