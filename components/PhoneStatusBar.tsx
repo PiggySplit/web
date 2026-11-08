@@ -1,3 +1,14 @@
+// iPhone home indicator; the frame must be `relative`. Sits over the screen like on a real phone.
+export function PhoneHomeIndicator() {
+  return (
+    <div
+      className="absolute bottom-2 left-1/2 z-10 -translate-x-1/2 w-[36%] h-[5px] rounded-full"
+      style={{ background: "var(--text-primary)" }}
+      aria-hidden="true"
+    />
+  );
+}
+
 // iPhone status bar for the phone mockups, in the app's background colour
 export default function PhoneStatusBar() {
   return (

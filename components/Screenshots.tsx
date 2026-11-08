@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useRef, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import PhoneStatusBar from "@/components/PhoneStatusBar";
+import PhoneStatusBar, { PhoneHomeIndicator } from "@/components/PhoneStatusBar";
 import type { ScreenItem } from "@/lib/translations/types";
 
 const screenMeta = [
@@ -263,6 +263,7 @@ function PhoneFrame({ children }: { children: ReactNode }) {
       <div className="w-full" style={{ height: "calc(100% - 36px)", position: "relative" }}>
         {children}
       </div>
+      <PhoneHomeIndicator />
     </div>
   );
 }
